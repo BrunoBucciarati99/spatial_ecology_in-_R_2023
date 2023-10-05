@@ -1,1 +1,16 @@
 spatstat package: package of statistycal analysis for spatial data
+bei
+plot(bei)
+# changing dimension : cex
+plot(bei, cex=0.5)
+plot(bei, cex=0.2)
+#changing the symbol : pch
+plot(bei, cex=0.2, pch=19)
+bei.extra
+plot(bei.extra)
+# using only part of the dataset
+plot(bei.extra$elev)
+# $ symbol means extracting from a dataset!!
+#time to assign for an object
+elevation <- bei.extra$elev
+plot(elevation)
