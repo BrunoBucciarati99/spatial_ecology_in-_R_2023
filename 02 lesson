@@ -14,3 +14,6 @@ plot(bei.extra$elev)
 #time to assign for an object
 elevation <- bei.extra$elev
 plot(elevation)
+#second method to assign elements
+elevation2 <- bei.extra[[1]]
+plot(elevation2)
