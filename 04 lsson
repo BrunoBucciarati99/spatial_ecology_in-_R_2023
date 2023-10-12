@@ -1,0 +1,98 @@
+#population distribution
+#why population disperse on the landscape in a certain manner?
+install.packages("sdm")
+install.packages("terra") #predictors, spatial data analysis
+install.packages("rgdal")  #species
+library(sdm)
+library(terra)
+file<- system.file("external/species.shp",package = "sdm")
+system.file("external/species.shp",package = "sdm")
+file
+#shp files are usually called vector files, that are series of coordinates
+
+rana<- vect(file)
+rana #is a spatial vector, you are dealing with points
+#we want to see what is contained in the occurrence column
+rana$Occurrence
+#the outcomes are datas of presence or absence of the rana temporaria
+#presence/absence datas  
+#otherwise aboundnce datas (indicates the quantity)
+#0s are tricky
+plot(rana)
+plot(rana, cex= 0.5)
+
+#selecting presences
+#== --> equal,  != -->not equal
+
+rana[rana$Occurrence==1,]
+pres<-rana[rana$Occurrence==1,]
+pres
+pres$Occurrence
+#pres=presences
+plot(pres, cex=0.5)
+
+#excercise: select absence and call them abs
+abs<-rana[rana$Occurrence!=1,]
+abs
+
+#excercise: plot presences and absences, one beside other
+plot(abs)
+par(mfrow=c(1,2))
+plot(pres)
+plot(abs)
+dev.off() #function to remove the graph from the monitor
+
+#exercise: plot pres and abs altoghether with different colours
+par(mfrow=c(1,2))
+plot(pres, col="blue")
+points(abs, col="green")
+
+#elevation predictor
+elev<- system.file("external/elevation.asc",package = "sdm")
+elevmap<-rast(elev) #from terra package
+elev
+plot(elevmap)
+points(pres, cex=0.5)
+
+#we can see from here that rana temporaria prefears 500-1000meters area
+#can't survive at higher elevation due to low T in winter
+
+#temperature predictor
+temp<- system.file("external/temperature.asc",package = "sdm")
+tempmap<-rast(temp) #from terra package
+elev
+plot(tempmap)
+points(pres, cex=0.5)
+
+#vegetation predictor
+veg<- system.file("external/vegetation.asc",package = "sdm")
+vegmap<-rast(veg) #from terra package
+elev
+plot(vegmap)
+points(pres, cex=0.5)
+#rana temporaria prefears places with high concentration of vegetation
+
+#precipitation predictor
+prec<- system.file("external/precipitation.asc",package = "sdm")
+precmap<-rast(prec) #from terra package
+elev
+plot(precmap)
+points(pres, cex=0.5)
+#rana temporaria prefears high precipitation area
+
+#NOW LET'S PLOT EVERYTHYNG TOGHETHER IN A MULTIFRAME GRAPH 
+#(4 MAPS TO BE PLOTTET TOGHETHER)
+
+par(mfrow=c(2,2))
+
+plot(elevmap)
+points(pres, cex=0.5)
+
+plot(tempmap)
+points(pres, cex=0.5)
+
+plot(vegmap)
+points(pres, cex=0.5)
+
+plot(precmap)
+points(pres, cex=0.5)
