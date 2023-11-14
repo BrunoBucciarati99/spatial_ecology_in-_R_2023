@@ -55,3 +55,5 @@ plot(difg, col=cldif)
 im.plotRGB(stackg, r=1, g=2, b=3)
 #means that the temperature is higher in 
 #the final period as it goes towards green/blue rather than red)
+
+#another data source: Nasa eath observatory
