@@ -50,3 +50,8 @@ plot(stackg, col=cldif)
 difg<-stackg[[1]]-stackg[[2]]
 #means difg<-g2000-g2015
 plot(difg, col=cldif)
+
+#make a RGB plot using different years (Red Green Blue)
+im.plotRGB(stackg, r=1, g=2, b=3)
+#means that the temperature is higher in 
+#the final period as it goes towards green/blue rather than red)
