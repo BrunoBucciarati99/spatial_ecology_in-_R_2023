@@ -1,6 +1,5 @@
 # spatial_ecology_in-_R_2023
-##professor
-duccio rocchini
+##Spatial Ecology in R 👾
 ##main scripts in this repo
 scripts on population
 scripts on community
