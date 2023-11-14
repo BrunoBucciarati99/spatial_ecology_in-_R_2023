@@ -1,0 +1,52 @@
+#time sries analysis
+
+# coronavirus lockdown
+library(imageRy)
+library(terra)
+
+im.list()
+
+#import datas
+EN01<-im.import("EN_01.png")
+#EN means european nitrogen
+EN13<-im.import("EN_13.png")   #situation in march
+par(mfrow=c(2,1))
+im.import("EN_01.png")
+im.import("EN_13.png")
+
+par(mfrow=c(2,1))
+im.plotRGB.auto(EN01)
+im.plotRGB.auto(EN13)
+
+dev.off()
+
+dif=EN01[[1]]-EN13[[2]]
+
+plot(dif) #difference between the 2 previous graphs
+cldif<-colorRampPalette(c("blue", "white", "red"))(100)
+plot(dif, col=cldif)
+
+#copernicus is a very good source to download datas of various type
+#like earth albedo ecc.
+
+#new example: temperature in greenland
+im.import("greenland.2000.tif")
+g2000<-im.import("greenland.2000.tif")
+plot(g200, col=cldif) #shows where perennial ice is
+
+g2005<-im.import("greenland.2005.tif")
+g2010<-im.import("greenland.2010.tif")
+g2015<-im.import("greenland.2015.tif")
+
+par(mfrow=c(2,1))
+plot(g2005, col=cldif)
+plot(g2010, col=cldif)
+
+#to stack the data:
+stackg<-c(g2000, g2005, g2010, g2015)
+plot(stackg, col=cldif)
+
+#to make a difference between the first and final elements of the stack
+difg<-stackg[[1]]-stackg[[2]]
+#means difg<-g2000-g2015
+plot(difg, col=cldif)
