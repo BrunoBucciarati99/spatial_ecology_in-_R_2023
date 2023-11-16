@@ -1,0 +1,61 @@
+
+# Available data sources:
+
+## Earth Observatory:
+https://earthobservatory.nasa.gov/
+  
+  ## Sentinel-2 data (ESA, 10m):
+  https://www.youtube.com/watch?v=KA2L4bDmo98
+  
+  ## Landsat (30m) and MODIS (>500m) data (NASA):
+  https://www.youtube.com/watch?v=JN-P04Dkx48
+  
+  ## Copernicus:
+  https://land.copernicus.vgt.vito.be/PDF/portal/Application.html
+  
+  # Steps:
+  
+  ## Step 1:
+  Download an image from the network
+  
+  ## Step 2:
+  Store iot in your computer
+  
+  ## Step 3:
+  Set the working directory:
+    setwd("yourpath")
+  
+  ## Step 4:
+  Import the data:
+    library(terra)
+  name <- rast("yourdata_in_the_working_directory")
+  
+#let's do it!
+library(terra)
+#set working directory to explain R the directory we are working with  
+#it is based on where you downloaded the external datas you wan to work with
+#vai sul dato che vuoi importare-->proprietà-->percorso (lo copi)
+#in case it doesn't work change the backslashes into slash (\-->/)
+
+setwd("C:/Users/bruno/OneDrive/Desktop")  #as i saved it in a desktop folder
+#now time to import the data, by putting rast function with the name of 
+#the picture, taken from "proprietà" and you add also the type of file, 
+# also foundable in "proprietà" of the file
+#(you add.jpg in this case)
+
+naja2003<-rast("najafiraq_etm_2003140_lrg.jpg")
+plotRGB(naja2003, r=1, G=2, B=3)
+
+#let's do it with the 2nd image on the site
+setwd("C:/Users/bruno/OneDrive/Desktop/")
+naja2023<-rast("najafiraq_oli_2023219_lrg.jpg")
+plotRGB(naja2023, r=1, G=2, b=3)
+
+par(mfrow=c(2,1))
+plotRGB(naja2003, r=1, g=2, b=3)
+
+plotRGB(naja2023, r=1, g=2, b=3)
+
+dev.off()
+
+#MISSING PART
