@@ -58,4 +58,12 @@ plotRGB(naja2023, r=1, g=2, b=3)
 
 dev.off()
 
-#MISSING PART
+#NEW LESSON:
+
+install.packages("ncdf4")
+library(ncdf4)
+library(terra)
+setwd("/Users/bruno/Downloads/")
+data<-rast("c_gls_SCE500_202311270000_CEURO_MODIS_V1.0.1.nc")
+data
+plot(data)
