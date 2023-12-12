@@ -1,0 +1,6 @@
+all the functions in latec have the backslash.
+to use the functions you put the inside graph parenthesis
+comments written with % before instead of #
+to use packege: /usepackage   (instead of library)
+\date{ } %to make it disapper
+\smallskip to devide to create space between the text.
