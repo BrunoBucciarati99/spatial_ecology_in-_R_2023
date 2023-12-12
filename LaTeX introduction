@@ -4,3 +4,6 @@ comments written with % before instead of #
 to use packege: /usepackage   (instead of library)
 \date{ } %to make it disapper
 \smallskip to devide to create space between the text.
+\session{} to start a new paragraph
+\label{} to assign numbers(?)
+\usepackage{hyperref} to
