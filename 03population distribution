@@ -97,36 +97,4 @@ points(pres, cex=0.5)
 plot(precmap)
 points(pres, cex=0.5)
 
-                                                                 #vegetation analysis
-install.packages("vegan")
-
-library(vegan)
-#to load a specific dataset
-data("dune")
-
-dune
-#to see only the initial and final part of the dataset
-head(dune)
-tail(dune)
-#detrended correspondence analisys
-decorana(dune)
-ord <- decorana(dune)
-ord
-
-#to find tghe total axis lenght
-ldc1 = 3.7004   
-ldc2 = 3.1166
-ldc3 = 1.30055
-ldc4 = 1.47888
-total = ldc1 + ldc2 + ldc3 + ldc4
-total
-pldc1 = ldc1 * 100 / total
-pldc2 = ldc2 * 100 / total
-pldc3 = ldc3 * 100 / total
-pldc4 = ldc4 * 100 / total
-plcd1
-plcd2
-plc3
-plcd4
-plot (ord)
-
+                                                                 
