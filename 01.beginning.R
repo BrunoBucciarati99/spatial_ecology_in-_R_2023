@@ -31,4 +31,27 @@ plot(people, microplastics, pch=19)
 plot(people, microplastics, pch=19, cex=2)                                   #cex is size of the data points
 plot(people, microplastics, pch=19, cex=2, col="yellow")                     #colour change is col="colour"
 
-     
+ # simple operation
+10 + 10
+
+# this is an object
+duccio <- 10 + 10
+duccio
+
+# objects
+adam <- 5 + 3
+duccio + adam
+
+# arrays
+diameter <- c(100, 10, 50, 20, 15)
+iron <- c(10, 1000, 20, 700, 900)
+
+# a function
+plot(iron, diameter) # iron and diameter are arguments!
+plot(iron, diameter, pch=19) # https://www.google.com/search?client=ubuntu-sn&hs=Ssn&sca_esv=564367827&channel=fs&sxsrf=AB5stBhOTkEGpHkLRMvuoUQuTCdqYjKtEw:1694448980289&q=pch+in+R&tbm=isch&source=lnms&sa=X&ved=2ahUKEwjzmr2s-qKBAxUOGuwKHUdlAnMQ0pQJegQIDBAB&biw=960&bih=484&dpr=2#imgrc=lUw3nrgRKV8ynM
+plot(iron, diameter, pch=19, cex=2)
+plot(iron, diameter, pch=19, cex=2, col="red")
+
+# do you want info about functions?
+?plot()
+    
