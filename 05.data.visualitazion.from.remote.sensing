@@ -46,9 +46,6 @@ plot(b2, col=cl)
 # Exercise: plot all the bands
 par(mfrow=c(2,2))
 
-cl <- colorRampPalette(c("dark blue", "blue", "light blue")) (100) # 100 is the amount of colours in the gradient
-plot(b2, col=cl)
-
 # exercise: plot the green band of Sentinel with a new color palette
 
 clr <- colorRampPalette(c("dark red", "red", "pink")) (100) 
