@@ -34,52 +34,99 @@ cl <- colorRampPalette(c("dark blue", "blue", "light blue")) (100) # 100 is the 
 plot(b2, col=cl)
 
 # exercise: plot the green band of Sentinel with a new color palette
-clg <- colorRampPalette(c("dark green", "green", "light green")) (100) # 100 is the amount of colours in the gradient
+clg <- colorRampPalette(c("dark green", "green", "light green")) (100) 
 plot(b3, col=clg)
 
 # multiframe
 par(mfrow=c(1,2))
 
-cl <- colorRampPalette(c("dark blue", "blue", "light blue")) (100) # 100 is the amount of colours in the gradient
+cl <- colorRampPalette(c("dark blue", "blue", "light blue")) (100) 
 plot(b2, col=cl)
 
-# Exercise: plot all the bands
+# stack images
+stacksent <- c(b2, b3, b4, b8)
+dev.off() # it closes devices
+plot(stacksent, col=cl)
+
+plot(stacksent[[4]], col=cl)
+
+# Exercise: plot in a multiframe the bands with different color ramps
 par(mfrow=c(2,2))
 
-# exercise: plot the green band of Sentinel with a new color palette
+clb <- colorRampPalette(c("dark blue", "blue", "light blue")) (100)
+plot(b2, col=clb)
 
-clr <- colorRampPalette(c("dark red", "red", "pink")) (100) 
+clg <- colorRampPalette(c("dark green", "green", "light green")) (100)
+plot(b3, col=clg)
 
-cln <- colorRampPalette(c("brown", "orange", "yellow")) (100) 
+clr <- colorRampPalette(c("dark red", "red", "pink")) (100)
+plot(b4, col=clr)
+
+cln <- colorRampPalette(c("brown", "orange", "yellow")) (100)
 plot(b8, col=cln)
 
 # Sentinel-2 image
-sentdo <- c(b2, b3, b4, b8)
-clall <- colorRampPalette(c("black", "dark gray", "gray")) (100) # 100 is the amount of colours in the gradient
-plot(sentdo, col=clall)
+
+stacksent <- c(b2, b3, b4, b8)
+
+clall <- colorRampPalette(c("black", "dark gray", "gray")) (100) 
+plot(stacksent, col=clall)
 
 # how to consider only one element
-plot(sentdo[[4]])
+plot(stacksent[[4]])
 
 # dev.off() cleaning graphs
 dev.off()
 
-# how to consider only one element
-plot(sentdo[[4]])
-
 # RGB space
-im.plotRGB.user(sentdo, 3, 2, 1)  # it plots the first three layers in the RGB components
+# stacksent: 
+# band2 blue element 1, stacksent[[1]] 
+# band3 green element 2, stacksent[[2]]
+# band4 red element 3, stacksent[[3]]
+# band8 nir element 4, stacksent[[4]]
 
-# use of NIR
-im.plotRGB.user(sentdo, 4, 3, 2)  # it plots the first three layers in the RGB components
+im.plotRGB(stacksent, r=3, g=2, b=1)           # red band is number 3, blue is number 1, green is 2 
+im.plotRGB (stacksent, r=4, g=3, b=2)          # infrared - dark red part is broad leaf forest, light red is pasture - everyhing red is vegetation (red band above others)
+                                               # you can discriminate between vegetation and water for example would be coloured black
+                                               # possible to see additional things 
+im.plotRGB (stacksent, r=3, g=4, b=2)          # changing the green above the red - everything that is becoming green is vegetation
+                                               # white and violet is bare soils, rocks, urban sites, roads, etc. - it is not water 
+                                               # now we can se what we didnt see in red band = 4 and that is the fact it is not water on the image - it is white - bare rock
+im.plotRGB (stacksent, r=3, g=2, b=4)          # now everything reflecting in infrared is becoming blue
+                                               # all vegetation is blue, soil is yellow-ish, cities are in yellow (useful for urban areas) 
 
-# multiframe with the natural colours image and the false colour image
-par(mfrow=c(1,2))
-im.plotRGB.user(sentdo, 3, 2, 1)  # it plots the first three layers in the RGB components
-im.plotRGB.user(sentdo, 4, 3, 2)  # it plots the first three layers in the RGB components
 
-im.plotRGB.user(sentdo, 3, 4, 2)  # it plots the first three layers in the RGB components
-im.plotRGB.user(sentdo, 3, 2, 4)  # it plots the first three layers in the RGB components
+# How much bands are correlated to each other? - we want to see that
+?pairs 
+# if you have 20 bands - you want to find correlation 20*19
+# 4 bands here which is 4*3  (12 correlations to measure correlation between each one of them with each one)
+# half of that are the distances - here there are 6 distances for 4 bands
 
-# what is the band carrying the highest infomration
-pairs(sentdo)
+pairs(stacksent)          # wait for it - plotting many data 
+                          # graphs - Piersons correlation coefficients (ranging from -1 to 1) 
+                          # green graphs are visible bands (green, blue, infra-red, near infra red)
+                          # graphs bringing more or less same information 
+                          # all bands correlated (positively) to each other - all between 0.7 and 1.00 
+                          # values of reflectance in integer - black scatter plots 
+                          # first column blue band 
+                          # histogram - representing frequency of every value of reflectance - in blue band several pixels with
+                          # smaller reflectance and small amount with higher reflectance 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
