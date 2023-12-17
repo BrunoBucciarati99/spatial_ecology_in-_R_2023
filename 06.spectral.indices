@@ -1,6 +1,4 @@
-#difference vegetation index (VGI) cam predict 
-#how much a plant is suffering in time
-#based on the absorbance of infraared
+#difference vegetation index (VGI) cam predict how much a plant is suffering in time based on the absorbance of infraared
 library(imageRy)
 library(terra)
 im.list()
