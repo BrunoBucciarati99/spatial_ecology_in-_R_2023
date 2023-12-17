@@ -72,6 +72,21 @@ par(mfrow=c(1,2))
 plot(ndvi1992, col=clvir)
 plot(ndvi2006, col=clvir)
 
+#IN SUMMARY
+
+# ndvi
+ndvi1992 = (m1992[[1]] - m1992[[2]]) / (m1992[[1]] + m1992[[2]])
+ndvi2006 = (m2006[[1]] - m2006[[2]]) / (m2006[[1]] + m2006[[2]])
+
+par(mfrow=c(1, 2))  
+plot(ndvi1992, col=cl)
+plot(ndvi2006, col=cl)
+
+# dvi by imageRy (shortcut)
+dvi1992i <- im.dvi(m1992, 1, 2)
+dvi2006i <- im.dvi(m2006, 1, 2)
+
 #im.ndvi()-->to speed up ndvi calculation without the need of using any formulas.
 ndvi2006a <-im.ndvi(m2006, 1 ,2)
 plot(ndvi2006a, col=cl)
+
