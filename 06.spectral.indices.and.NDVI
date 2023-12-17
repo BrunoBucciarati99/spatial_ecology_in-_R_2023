@@ -34,7 +34,7 @@ plot(dvi1992)
 cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
 plot(dvi1992, col=cl)
 
-                                                                         # Exercise: plot the 2006 image with NIR in the Green component of the RGB space
+                                       # Exercise: plot the 2006 image with NIR in the Green component of the RGB space
 dvi2006 = m2006[[1]] - m2006[[2]]
 plot(dvi2006, col=cl)
 
