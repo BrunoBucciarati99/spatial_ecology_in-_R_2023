@@ -72,6 +72,6 @@ par(mfrow=c(1,2))
 plot(ndvi1992, col=clvir)
 plot(ndvi2006, col=clvir)
 
-# speediing up calculation
-ndvi2006a <- im.ndvi(m2006, 1, 2)
+#im.ndvi()-->to speed up ndvi calculation
+ndvi2006a <-im.ndvi(m2006, 1 ,2)
 plot(ndvi2006a, col=cl)
