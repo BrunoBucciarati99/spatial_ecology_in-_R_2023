@@ -1,3 +1,5 @@
+#Classifying Remote Sensing Data and estimate the amount of change in different classes
+
 library(terra)
 library(imageRy)
 library(ggplot2)
@@ -6,10 +8,13 @@ library(patchwork)
 im.list()
 #takin pictures of the sun
 sun <- im.import("Solar_Orbiter_s_first_views_of_the_Sun_pillars.jpg")
-#you can see 3 energy leves from the picture
+
+#you can see 3 energy leves from the picture (associated with different colors)
+# classifying the gases with the "im.classify()" function
 sunc <- im.classify(sun)
 plotRGB(sun, 1, 2, 3) 
 plot(sunc)
+
 #time to take datas from matogrosso areas
 
 im.list()
@@ -22,12 +27,14 @@ m1992c <- im.classify(m1992, num_clusters=2)
 # classes of 1992:-->class 1: agricultural areas-->class 2: forest
 
 #classification of 2006
-
 m2006c <- im.classify(m2006, num_clusters=2)
 
 # classes of 2006: -->class 1: agricultural areas-->class 2: forest
 #"freq" function calculates the frequencies for a certain pixel
-# 1992
+
+#"freq()" -->to see the proportion of pixels in each class (how many pixels are in forests, and how many are in bare soil)
+
+#1992
 freq1992 <- freq(m1992c)
 freq1992
 
@@ -35,7 +42,7 @@ freq1992
 freq2006 <- freq(m2006c)
 freq2006
 
-# percentages(ncell calculates the number of pixels in an image)
+#If we want to see the percentages, we first have to find the total number of pixels throught "ncell()"
 tot1992 = ncell(m1992)
 perc1992 = freq1992 * 100 / tot1992
 perc1992
