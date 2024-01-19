@@ -1,70 +1,70 @@
 ---
 title: "MarkdownReport"
-author: "Paula Garbin"
+author: "Bruno Burke"
 date: "2024-01-09"
 output: html_document
 ---
 
-# My first markdown document!            
- In Rmarkdown # is a title 
+# My first markdown document!
 
-Here you can add some text if you want! 
-# RMarkDown file!
-In this case you obtain a result:
-```{r, eval=T}             state to the software what language we are using and if we want to run the code or not 
- 2+3                       language is r, if code should lead to the result or not (eval=T or F)
+Here you can add some text if you want!
+
+In this case we obtain a result
+```{r, eval=T}         # are stating what language we are using (R), and if we want to evaluated it or not (eval = True)
+2 + 3                  # when we click 'knit' in R, the code will show in a grey box, and the result will be in a white box below
+```
+In this case we DO NOT obtain a result    # we don't put the hashtag here because we want this sentence to show up in the document
+```{r, eval=F}         
+2 + 3                 
 ```
 
-In this case you do not:
-```{r, eval=F}            
- 2+3                     
+Using proper packages; the imageRy package has been built in Alma Mater for learning remote sensing
+```{r, eval=F}         
+library(imageRy)                 
 ```
-
-Using proper packages; the imageRy package has been built at Alma Mater for learning remote sensing:
-```{r, eval=T}            
- library(imageRy)                   
+Let's import some data, starting with a list of data
+```{r, eval=T}         
+im.list()                 
 ```
-
-Lets import some data by listing them in imageRy:
-```{r, eval=T}
- im.list()                   
+Importing Mato grosso area image:
+```{r, eval=T}         
+mato1992 <- im.import("matogrosso_l5_1992219_lrg.jpg")
 ```
-
-Importing the Mato Grosso area image and excluding warnings: 
-```{r, eval=T, warning=F}
- mato1992 <- im.import("matogrosso_l5_1992219_lrg.jpg")                  
+Importing Mato grosso area image:
+```{r, eval=T, warning=F}         
+mato1992 <- im.import("matogrosso_l5_1992219_lrg.jpg")
 ```
-
-In order to get information on the image, just type the name of the object: 
-```{r, eval=T}
-mato1992                  
+In order to get info on the image, just type the name of the object:
+```{r, eval=T}         
+mato1992                 
 ```
-
-Making a new plot of the Mato Grosso area with the NIR on top of the green component of 
-the RGB space: 
-```{r, eval=T}
-im.plotRGB(mato1992, r=2, g=1, b=3)                 
+Making a new plot of the Mato Grosso area with the NIR ontop of the green component of the RGB space:
+```{r, eval=T}         
+im.plotRGB(mato1992, r=2, g=1, b=3)                
 ```
-
-Plotting several images altogether: 
-```{r, eval=T}
-par(mfrow=c(2,2))
+Plotting several images all together:
+```{r, eval=T} 
+par(mfrow(2,2))
+im.plotRGB(mato1992, r=1, g=2, b=3)
 im.plotRGB(mato1992, r=1, g=2, b=3) 
-im.plotRGB(mato1992, r=2, g=1, b=3)
-im.plotRGB(mato1992, r=3, g=2, b=1) 
-im.plotRGB(mato1992, r=2, g=1, b=1) 
+im.plotRGB(mato1992, r=1, g=2, b=3) 
+im.plotRGB(mato1992, r=1, g=2, b=3) 
 ```
-
-Calculating spectral indices:
-```{r, eval=T}
-library(viridis)
+Calculating spectral indices
+```{r, eval=T} 
 library(terra)
+library(viridisc)
 dvi <- mato1992[[1]]-mato1992[[2]]
 viridisc <- colorRampPalette(viridis(7))(255)
 plot(dvi, col=viridisc)
 ```
-Calculating variability: 
-```{r, eval=T}
+
+Calculating Variability
+```{r, eval=T} 
+sd3 <- focal(mato1992[[1]], matrix(1/9, 3, 3), fun=sd)
+plot(sd3, col = viridisc)
+
+Calculating Variability
+```{r, eval=T} 
 sd5 <- focal(mato1992[[1]], matrix(1/25, 5, 5), fun=sd)
-plot(sd5, col=viridisc)
-```
+plot(sd5, col = viridisc)
