@@ -1,7 +1,7 @@
 # spatial_ecology_in-_R_2023  👾
 
 # Professor: 
-Duccio Rocchini, former president of the master program
+Duccio Rocchini,  former president of the master program
 
 # main scripts in this repo:
 >scripts on population
