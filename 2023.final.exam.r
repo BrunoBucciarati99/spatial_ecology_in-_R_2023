@@ -6,9 +6,23 @@
 #The aim of the work is to analyze the change in the Fraction of green Vegetation Cover in Iceland from 2000 to 2019 to verify whether reforestation projects are working or not
 
 # Packages needed
+library(viridis) #colorblind-friendly map
+library(raster) #data analysis and modelling
+library(ggplot2) #data visualization
+library(patchwork) #composer of plots
 
 # define the extent
 ext <- c(-180, 180, -90, 90)
 newimage <- crop(image, ext)
 
 library(ncdf4)
+
+# Recall all the packages I will need for this work
+
+# Data import, setting the work directory
+
+# Data saving using the function brick from the package raster
+
+# Plotting the data with the function "plotRGB()" to have a look at the images
+
+
