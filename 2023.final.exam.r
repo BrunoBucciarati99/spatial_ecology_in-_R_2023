@@ -41,3 +41,11 @@ plot(cropiceland2000)
 plot(cropiceland2010)
 plot(cropiceland2019)
 
+
+#changes in the years of the Fraction of green Vegetation Cover
+
+#difference between the years to see the changes
+
+#difference between 2000 and 2010
+
+#difference between 2010 and 2019
