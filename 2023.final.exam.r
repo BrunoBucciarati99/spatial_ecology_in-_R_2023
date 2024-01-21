@@ -36,8 +36,6 @@ ext <- c(-24,-12,63,67)
 cropiceland2000<-crop(iceland2000, ext)
 cropiceland2010<-crop(iceland2010, ext)
 cropiceland2019<-crop(iceland2019, ext)
-plot(ext)
-
 
 plot(cropiceland2000)
 plot(cropiceland2010)
