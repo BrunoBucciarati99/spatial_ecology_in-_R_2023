@@ -13,7 +13,8 @@ library(ggplot2) #data visualization
 library(patchwork) #composer of plots
 library(ncdf4)
 library(terra)
-library(RStoolbox)
+library(RStoolbox) 
+
 
 # Data import, setting the work directory
 
@@ -22,15 +23,14 @@ setwd("C:/Users/bruno/OneDrive/Desktop/Spatial.ecology")
 
 # Data saving using the function brick from the package raster
 
-fcover2000<-brick("FCOVER2000.nc")
-fcover2010<-brick("FCOVER2010.nc")
-fcover2019<-brick("FCOVER2019.nc")
-
+fcover2000<-raster("FCOVER2000.nc")
+fcover2010<-raster("FCOVER2010.nc")
+fcover2019<-raster("FCOVER2019.nc")
 
 
 # Cutting the map define the extent of the research
 
-ext <- c(-24,-12,63,67)
+ext <- c(-26,-12,63,67)
 iceland2000<- crop(fcover2000, ext)
 iceland2010<- crop(fcover2010, ext)
 iceland2019<- crop(fcover2019, ext)
@@ -40,27 +40,51 @@ plot(iceland2000)
 plot(iceland2010)
 plot(iceland2019)
 
-#################################
-library(raster)
-library(ggplot2)
-
-# Read the raster file
-fcover2000 <- raster("FCOVER2000.nc")
-
-# Cutting the map to define the extent of the research
-ext <- c(-24, -12, 63, 67)
-iceland2000 <- crop(fcover2000, ext)
 
 # Convert raster to data frame
 iceland2000_df <- as.data.frame(iceland2000, xy = TRUE)
 iceland2010_df <- as.data.frame(iceland2010, xy = TRUE)
+iceland2019_df <- as.data.frame(iceland2019, xy = TRUE)
+
 # Plot using ggplot2
-ggplot(iceland2010_df, aes(x = x, y = y, fill = Fraction.of.green.Vegetation.Cover.1km)) +
-  geom_tile() +
-  scale_fill_viridis(option = "plasma") +
+ggplot2000<-ggplot(iceland2000_df, aes(x = x, y = y, 
+  fill = Fraction.of.green.Vegetation.Cover.1km)) +geom_tile() +
+  scale_fill_viridis(option = "turbo") +
+  ggtitle("FCOVER 2000")
+
+  
+ggplot2010<-ggplot(iceland2010_df, aes(x = x, y = y, 
+  fill = Fraction.of.green.Vegetation.Cover.1km)) +geom_tile() +
+  scale_fill_viridis(option = "turbo") +
   ggtitle("FCOVER 2010")
 
+  
+ggplot2019<-ggplot(iceland2019_df, aes(x = x, y = y, 
+  fill = Fraction.of.green.Vegetation.Cover.1km)) +
+  geom_tile() +
+  scale_fill_viridis(option = "turbo") +
+  ggtitle("FCOVER 2019")
+
+ggplot2000
+ggplot2010
+ggplot2019
+
 ?scale_fill_viridis
+
+#saving the new images in jpeg format
+
+ggsave("ggplot2000.jpg", ggplot2000, device = "jpeg",
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot2010.jpg", ggplot2010, device = "jpeg", 
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot2019.jpg", ggplot2019, device = "jpeg", 
+       width = 9, height = 5, units = "in")
+
+
+
+
 
 #changes in the years of the Fraction of green Vegetation Cover (3-plots comparison)
 
