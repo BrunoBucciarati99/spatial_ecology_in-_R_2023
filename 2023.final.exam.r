@@ -13,6 +13,7 @@ library(ggplot2) #data visualization
 library(patchwork) #composer of plots
 library(ncdf4)
 library(terra)
+library(RStoolbox)
 
 # Data import, setting the work directory
 
