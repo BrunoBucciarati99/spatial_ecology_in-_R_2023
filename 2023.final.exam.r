@@ -143,16 +143,27 @@ ggplot_dif2019_2000 <- ggplot(dif2019_2000_df, aes(x = x, y = y,
   scale_fill_viridis(option = "turbo") +
   ggtitle("FCOVER Change: 2019 - 2000")
 
-
 ggplot_dif2010_2000
 ggplot_dif2019_2010
 ggplot_dif2019_2000
 
+#pixel estimation
 
+vegetation_pixels_2000 <- sum(!is.na(iceland2000[]) & iceland2000[] > 0)
+vegetation_pixels_2010 <- sum(!is.na(iceland2010[]) & iceland2010[] > 0)
+vegetation_pixels_2019 <- sum(!is.na(iceland2019[]) & iceland2019[] > 0)
+
+# Calculate the percentage of vegetation cover
+percentage_cover_2000 <- (vegetation_pixels_2000 / total_pixels_2000) * 100
+percentage_cover_2010 <- (vegetation_pixels_2010 / total_pixels_2010) * 100
+percentage_cover_2019 <- (vegetation_pixels_2019 / total_pixels_2019) * 100
+plot(iceland2000)
+
+# Print the results
+cat("Percentage of vegetation cover in 2000:", round(percentage_cover_2000, 2), "%\n")
+cat("Percentage of vegetation cover in 2010:", round(percentage_cover_2010, 2), "%\n")
+cat("Percentage of vegetation cover in 2019:", round(percentage_cover_2019, 2), "%\n")
 #1-->difference between 2000 and 2010 (pixel difference)
 
-#2-->difference between 2010 and 2019 (pixel difference)
-
-#3-->overall pixel difference between 2000 and 2019
 
 #data interpretation
