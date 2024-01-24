@@ -147,6 +147,7 @@ ggplot_dif2010_2000
 ggplot_dif2019_2010
 ggplot_dif2019_2000
 
+######################################################################################
 #pixel estimation
 
 vegetation_pixels_2000 <- sum(!is.na(iceland2000[]) & iceland2000[] > 0)
