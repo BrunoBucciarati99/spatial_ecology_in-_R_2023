@@ -48,19 +48,19 @@ iceland2019_df <- as.data.frame(iceland2019, xy = TRUE)
 
 # Plot using ggplot2
 ggplot2000<-ggplot(iceland2000_df, aes(x = x, y = y, 
-  fill = Fraction.of.green.Vegetation.Cover.1km)) +geom_tile() +
+                                       fill = Fraction.of.green.Vegetation.Cover.1km)) +geom_tile() +
   scale_fill_viridis(option = "turbo") +
   ggtitle("FCOVER 2000")
 
-  
+
 ggplot2010<-ggplot(iceland2010_df, aes(x = x, y = y, 
-  fill = Fraction.of.green.Vegetation.Cover.1km)) +geom_tile() +
+                                       fill = Fraction.of.green.Vegetation.Cover.1km)) +geom_tile() +
   scale_fill_viridis(option = "turbo") +
   ggtitle("FCOVER 2010")
 
-  
+
 ggplot2019<-ggplot(iceland2019_df, aes(x = x, y = y, 
-  fill = Fraction.of.green.Vegetation.Cover.1km)) +
+                                       fill = Fraction.of.green.Vegetation.Cover.1km)) +
   geom_tile() +
   scale_fill_viridis(option = "turbo") +
   ggtitle("FCOVER 2019")
@@ -126,19 +126,19 @@ dif2019_2000_df <- as.data.frame(dif2019_2000, xy = TRUE)
 # Plotting the differences using ggplot2
 
 ggplot_dif2010_2000 <- ggplot(dif2010_2000_df, aes(x = x, y = y, 
-  fill = layer)) +
+                                                   fill = layer)) +
   geom_tile() +
   scale_fill_viridis(option = "turbo") +
   ggtitle("FCOVER Change: 2010 - 2000")
 
 ggplot_dif2019_2010 <- ggplot(dif2019_2010_df, aes(x = x, y = y, 
-  fill = layer)) +
+                                                   fill = layer)) +
   geom_tile() +
   scale_fill_viridis(option = "turbo") +
   ggtitle("FCOVER Change: 2019 - 2010")
 
 ggplot_dif2019_2000 <- ggplot(dif2019_2000_df, aes(x = x, y = y, 
-  fill = layer)) +
+                                                   fill = layer)) +
   geom_tile() +
   scale_fill_viridis(option = "turbo") +
   ggtitle("FCOVER Change: 2019 - 2000")
@@ -147,24 +147,33 @@ ggplot_dif2010_2000
 ggplot_dif2019_2010
 ggplot_dif2019_2000
 
-######################################################################################
+
 #pixel estimation
 
+#total pixel estimation
+total_pixels_2000 <- ncell(iceland2000)
+total_pixels_2010 <- ncell(iceland2010)
+total_pixels_2019 <- ncell(iceland2019)
+
+#fcover estimation 
+#exclusion of NA values before checking if the pixel values are greater than 0.
 vegetation_pixels_2000 <- sum(!is.na(iceland2000[]) & iceland2000[] > 0)
 vegetation_pixels_2010 <- sum(!is.na(iceland2010[]) & iceland2010[] > 0)
 vegetation_pixels_2019 <- sum(!is.na(iceland2019[]) & iceland2019[] > 0)
 
-# Calculate the percentage of vegetation cover
+# Calculation of the percentage of vegetation cover over the total pixels
 percentage_cover_2000 <- (vegetation_pixels_2000 / total_pixels_2000) * 100
 percentage_cover_2010 <- (vegetation_pixels_2010 / total_pixels_2010) * 100
 percentage_cover_2019 <- (vegetation_pixels_2019 / total_pixels_2019) * 100
-plot(iceland2000)
 
-# Print the results
-cat("Percentage of vegetation cover in 2000:", round(percentage_cover_2000, 2), "%\n")
-cat("Percentage of vegetation cover in 2010:", round(percentage_cover_2010, 2), "%\n")
-cat("Percentage of vegetation cover in 2019:", round(percentage_cover_2019, 2), "%\n")
-#1-->difference between 2000 and 2010 (pixel difference)
+percentage_cover_2000
+percentage_cover_2010
+percentage_cover_2019
+
+#calculation of the pixel difference related to Fcover in 2000,2010,2019
 
 
 #data interpretation
+
+
+#What kind of vegetation is lost? forest index assessment
