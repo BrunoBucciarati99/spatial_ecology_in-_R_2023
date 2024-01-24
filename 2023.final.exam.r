@@ -82,6 +82,7 @@ ggsave("ggplot2010.jpg", ggplot2010, device = "jpeg",
 ggsave("ggplot2019.jpg", ggplot2019, device = "jpeg", 
        width = 9, height = 5, units = "in")
 
+#changes in the years of the Fraction of green Vegetation Cover (3-plots comparison)
 # arrange the plots toghether and save in JPEG
 
 #vertical way
@@ -102,12 +103,51 @@ combined_plots
 ggsave("combined_plots.jpg", combined_plots, 
        device = "jpeg", width = 16, height = 9, units = "in")
 
+# Difference between years to see the changes (pixel difference)
+# Difference between the years to see the changes
+# Plotting and saving them
+
+dif2010_2000<-iceland2010-iceland2000
+
+dif2019_2010 <- iceland2019-iceland2010
+
+dif2019_2000 <- iceland2019-iceland2000
+
+plot(dif2010_2000)
+plot(dif2019_2010)
+plot(dif2019_2000)
+
+# Convert raster to data frame
+
+dif2010_2000_df <- as.data.frame(dif2010_2000, xy = TRUE)
+dif2019_2010_df <- as.data.frame(dif2019_2010, xy = TRUE)
+dif2019_2000_df <- as.data.frame(dif2019_2000, xy = TRUE)
+
+# Plotting the differences using ggplot2
+
+ggplot_dif2010_2000 <- ggplot(dif2010_2000_df, aes(x = x, y = y, 
+  fill = layer)) +
+  geom_tile() +
+  scale_fill_viridis(option = "turbo") +
+  ggtitle("FCOVER Change: 2010 - 2000")
+
+ggplot_dif2019_2010 <- ggplot(dif2019_2010_df, aes(x = x, y = y, 
+  fill = layer)) +
+  geom_tile() +
+  scale_fill_viridis(option = "turbo") +
+  ggtitle("FCOVER Change: 2019 - 2010")
+
+ggplot_dif2019_2000 <- ggplot(dif2019_2000_df, aes(x = x, y = y, 
+  fill = layer)) +
+  geom_tile() +
+  scale_fill_viridis(option = "turbo") +
+  ggtitle("FCOVER Change: 2019 - 2000")
 
 
+ggplot_dif2010_2000
+ggplot_dif2019_2010
+ggplot_dif2019_2000
 
-#changes in the years of the Fraction of green Vegetation Cover (3-plots comparison)
-
-#difference between the years to see the changes (pixel difference)
 
 #1-->difference between 2000 and 2010 (pixel difference)
 
