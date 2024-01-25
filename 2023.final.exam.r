@@ -171,9 +171,15 @@ percentage_cover_2010
 percentage_cover_2019
 
 #calculation of the pixel difference related to Fcover in 2000,2010,2019
+percentage_cover_change2010_2000<-percentage_cover_2010-percentage_cover_2000
+percentage_cover_change2019_2010<-percentage_cover_2019-percentage_cover_2010
+percentage_cover_change2019_2000<-percentage_cover_2019-percentage_cover_2000
 
+percentage_cover_change2010_2000
+percentage_cover_change2019_2010
+percentage_cover_change2019_2000
 
 #data interpretation
 
 
-#What kind of vegetation is lost? forest index assessment
+#What kind of vegetation is lost? forest cover assessment
