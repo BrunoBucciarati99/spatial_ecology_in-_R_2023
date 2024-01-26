@@ -145,6 +145,16 @@ ggplot_dif2010_2000
 ggplot_dif2019_2010
 ggplot_dif2019_2000
 
+#saving the new images in jpeg format
+
+ggsave("ggplot_dif2010_2000.jpg", ggplot_dif2010_2000, device = "jpeg",
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot_dif2019_2010", ggplot_dif2019_2010, device = "jpeg", 
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot_dif2019_2000", ggplot_dif2019_2000, device = "jpeg", 
+       width = 9, height = 5, units = "in")
 
 #pixel estimation
 
