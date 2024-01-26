@@ -21,7 +21,7 @@ library(RStoolbox)
 setwd("C:/Users/bruno/OneDrive/Desktop/Spatial.ecology")
 
 
-# Data saving using the function brick from the package raster
+# Data saving using the function raster
 
 fcover2000<-raster("FCOVER2000.nc")
 fcover2010<-raster("FCOVER2010.nc")
@@ -103,9 +103,7 @@ combined_plots
 ggsave("combined_plots.jpg", combined_plots, 
        device = "jpeg", width = 16, height = 9, units = "in")
 
-# Difference between years to see the changes (pixel difference)
-# Difference between the years to see the changes
-# Plotting and saving them
+# Difference between years to see the changes 
 
 dif2010_2000<-iceland2010-iceland2000
 
@@ -157,6 +155,7 @@ total_pixels_2019 <- ncell(iceland2019)
 
 #fcover estimation 
 #exclusion of NA values before checking if the pixel values are greater than 0.
+#values higher than 0 consider all the different qualities of Fcover.
 vegetation_pixels_2000 <- sum(!is.na(iceland2000[]) & iceland2000[] > 0)
 vegetation_pixels_2010 <- sum(!is.na(iceland2010[]) & iceland2010[] > 0)
 vegetation_pixels_2019 <- sum(!is.na(iceland2019[]) & iceland2019[] > 0)
@@ -181,5 +180,61 @@ percentage_cover_change2019_2000
 
 #data interpretation
 
+#################################################################################
+#################################################################################
+#################################################################################
 
-#What kind of vegetation is lost? forest cover assessment
+#What kind of vegetation is lost? Leaf Area Index (LAI) assessment
+
+# Data saving using the function raster
+LAI2000<-raster("LAI2000.nc")
+LAI2010<-raster("LAI2010.nc")
+LAI2019<-raster("LAI2019.nc")
+
+LAI2000
+LAI2010
+LAI2019
+
+# Cutting the map define the extent of the research
+ext <- c(-26,-12,63,67)
+
+LAIiceland2000<- crop(LAI2000, ext)
+LAIiceland2010<- crop(LAI2010, ext)
+LAIiceland2019<- crop(LAI2019, ext)
+
+plot(LAIiceland2000)
+plot(LAIiceland2010)
+plot(LAIiceland2019)
+
+
+#pixel estimation
+
+#total pixel estimation
+tot_pixel_2000<-ncell(LAIiceland2000)
+tot_pixel_2010<-ncell(LAIiceland2010)
+tot_pixel_2019<-ncell(LAIiceland2019)
+
+tot_pixel_2000
+tot_pixel_2010
+tot_pixel_2019
+
+#fcover estimation 
+#exclusion of NA values before checking if the pixel 
+#values are greater than 3 --> value associated with moderate vegetation density.
+LAI_pixels_2000 <- sum(!is.na(LAIiceland2000[]) & LAIiceland2000[] > 3)
+LAI_pixels_2010 <- sum(!is.na(LAIiceland2010[]) & LAIiceland2010[] > 3)
+LAI_pixels_2019 <- sum(!is.na(LAIiceland2019[]) & LAIiceland2019[] > 3)
+
+LAI_pixels_2000 
+LAI_pixels_2010 
+LAI_pixels_2019
+
+
+# Calculation of the percentage of LAI cover > 3 over the total pixels
+LAI_percentage_cover_2000 <- (LAI_pixels_2000 / tot_pixel_2000) * 100
+LAI_percentage_cover_2010 <- (LAI_pixels_2010 / tot_pixel_2010) * 100
+LAI_percentage_cover_2019 <- (LAI_pixels_2019 / tot_pixel_2019) * 100
+
+LAI_percentage_cover_2000 
+LAI_percentage_cover_2010 
+LAI_percentage_cover_2019 
