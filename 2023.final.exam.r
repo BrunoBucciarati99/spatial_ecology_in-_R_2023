@@ -205,6 +205,7 @@ LAI2000
 LAI2010
 LAI2019
 
+
 # Cutting the map define the extent of the research
 ext <- c(-26,-12,63,67)
 
@@ -215,6 +216,101 @@ LAIiceland2019<- crop(LAI2019, ext)
 plot(LAIiceland2000)
 plot(LAIiceland2010)
 plot(LAIiceland2019)
+
+
+# Convert raster to data frame
+LAIiceland2000_df <- as.data.frame(LAIiceland2000, xy = TRUE)
+LAIiceland2010_df <- as.data.frame(LAIiceland2010, xy = TRUE)
+LAIiceland2019_df <- as.data.frame(LAIiceland2019, xy = TRUE)
+
+# Plot using ggplot2
+ggplot_LAI_2000<-ggplot(LAIiceland2000_df, aes(x = x, y = y, 
+          fill = Leaf.Area.Index.1km)) +geom_tile() +
+  scale_fill_viridis(option = "turbo") +
+  ggtitle("LEAF AREA INDEX 2000")
+
+
+ggplot_LAI_2010<-ggplot(LAIiceland2010_df, aes(x = x, y = y, 
+         fill = Leaf.Area.Index.1km)) +geom_tile() +
+  scale_fill_viridis(option = "turbo") +
+  ggtitle("LEAF AREA INDEX 2010")
+
+
+ggplot_LAI_2019<-ggplot(LAIiceland2019_df, aes(x = x, y = y, 
+           fill = Leaf.Area.Index.1km)) +
+  geom_tile() +
+  scale_fill_viridis(option = "turbo") +
+  ggtitle("LEAF AREA INDEX 2019")
+
+ggplot_LAI_2000
+ggplot_LAI_2010
+ggplot_LAI_2019
+
+
+#saving the new images in jpeg format
+
+ggsave("ggplot_LAI_2000.jpg", ggplot_LAI_2000, device = "jpeg",
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot_LAI_2010.jpg", ggplot_LAI_2010, device = "jpeg", 
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot_LAI_2019.jpg", ggplot_LAI_2019, device = "jpeg", 
+       width = 9, height = 5, units = "in")
+
+
+# Difference between years to see the changes 
+
+LAI_dif2010_2000<-LAIiceland2010-LAIiceland2000
+
+LAI_dif2019_2010 <- LAIiceland2019-LAIiceland2010
+
+LAI_dif2019_2000 <- LAIiceland2019-LAIiceland2000
+
+plot(LAI_dif2010_2000)
+plot(LAI_dif2019_2010)
+plot(LAI_dif2019_2000)
+
+# Convert raster to data frame
+
+LAI_dif2010_2000_df <- as.data.frame(LAI_dif2010_2000, xy = TRUE)
+LAI_dif2019_2010_df <- as.data.frame(LAI_dif2019_2010, xy = TRUE)
+LAI_dif2019_2000_df <- as.data.frame(LAI_dif2019_2000, xy = TRUE)
+
+# Plotting the differences using ggplot2
+
+ggplot_LAI_dif2010_2000 <- ggplot(LAI_dif2010_2000_df, aes(x = x, y = y, 
+                                                   fill = layer)) +
+  geom_tile() +
+  scale_fill_viridis(option = "turbo") +
+  ggtitle("LAI Change: 2010 - 2000")
+
+ggplot_LAI_dif2019_2010 <- ggplot(LAI_dif2019_2010_df, aes(x = x, y = y, 
+                                                   fill = layer)) +
+  geom_tile() +
+  scale_fill_viridis(option = "turbo") +
+  ggtitle("LAI Change: 2019 - 2010")
+
+ggplot_LAI_dif2019_2000 <- ggplot(LAI_dif2019_2000_df, aes(x = x, y = y, 
+                                                   fill = layer)) +
+  geom_tile() +
+  scale_fill_viridis(option = "turbo") +
+  ggtitle("LAI Change: 2019 - 2000")
+
+ggplot_LAI_dif2010_2000
+ggplot_LAI_dif2019_2010
+ggplot_LAI_dif2019_2000
+
+#saving the new images in jpeg format
+
+ggsave("ggplot_LAI_dif2010_2000.jpg", ggplot_LAI_dif2010_2000, device = "jpeg",
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot_LAI_dif2019_2010", ggplot_LAI_dif2019_2010, device = "jpeg", 
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot_LAI_dif2019_2000", ggplot_LAI_dif2019_2000, device = "jpeg", 
+       width = 9, height = 5, units = "in")
 
 
 #pixel estimation
@@ -228,9 +324,9 @@ tot_pixel_2000
 tot_pixel_2010
 tot_pixel_2019
 
-#fcover estimation 
+#LAI estimation 
 #exclusion of NA values before checking if the pixel 
-#values are greater than 3 --> value associated with moderate vegetation density.
+#LAI values greater than 3 --> value associated with moderate vegetation density.
 LAI_pixels_2000 <- sum(!is.na(LAIiceland2000[]) & LAIiceland2000[] > 3)
 LAI_pixels_2010 <- sum(!is.na(LAIiceland2010[]) & LAIiceland2010[] > 3)
 LAI_pixels_2019 <- sum(!is.na(LAIiceland2019[]) & LAIiceland2019[] > 3)
@@ -248,3 +344,54 @@ LAI_percentage_cover_2019 <- (LAI_pixels_2019 / tot_pixel_2019) * 100
 LAI_percentage_cover_2000 
 LAI_percentage_cover_2010 
 LAI_percentage_cover_2019 
+
+# Filter LAI values greater than 3
+LAIiceland2000[LAIiceland2000 <= 3] <- NA
+LAIiceland2010[LAIiceland2010 <= 3] <- NA
+LAIiceland2019[LAIiceland2019 <= 3] <- NA
+
+# Load Iceland map
+Iceland_map <- getData("GADM", country = "IS", level=0)
+
+# Convert Iceland map to data frame
+Iceland_map_df <- fortify(Iceland_map)
+
+# Convert raster to data frame for ggplot2
+LAI2000_df <- as.data.frame(LAIiceland2000, xy = TRUE)
+LAI2010_df <- as.data.frame(LAIiceland2010, xy = TRUE)
+LAI2019_df <- as.data.frame(LAIiceland2019, xy = TRUE)
+
+# Plot using ggplot2
+ggplot_higher_LAI_2000<-ggplot() +
+  geom_polygon(data = Iceland_map_df, aes(x = long, y = lat, group = group), fill = "white", color = "black") +
+  geom_raster(data = LAI2000_df, aes(x = x, y = y, fill = Leaf.Area.Index.1km), alpha = 0.8) +
+  scale_fill_viridis(option = "turbo", name = "LAI", guide = "legend") +
+  labs(title = "Leaf Area Index in Iceland - 2000") 
+
+ggplot_higher_LAI_2010<-ggplot() +
+  geom_polygon(data = Iceland_map_df, aes(x = long, y = lat, group = group), fill = "white", color = "black") +
+  geom_raster(data = LAI2010_df, aes(x = x, y = y, fill = Leaf.Area.Index.1km), alpha = 0.8) +
+  scale_fill_viridis(option = "turbo", name = "LAI", guide = "legend") +
+  labs(title = "Leaf Area Index in Iceland - 2010") 
+
+ggplot_higher_LAI_2019<-ggplot() +
+  geom_polygon(data = Iceland_map_df, aes(x = long, y = lat, group = group), fill = "white", color = "black") +
+  geom_raster(data = LAI2019_df, aes(x = x, y = y, fill = Leaf.Area.Index.1km), alpha = 0.8) +
+  scale_fill_viridis(option = "turbo", name = "LAI", guide = "legend") +
+  labs(title = "Leaf Area Index in Iceland - 2019") 
+
+ggplot_higher_LAI_2000
+ggplot_higher_LAI_2010
+ggplot_higher_LAI_2019
+
+##saving the new images in jpeg format
+ggsave("ggplot_higher_LAI_2000.jpg", ggplot_higher_LAI_2000, device = "jpeg",
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot_higher_LAI_2010", ggplot_higher_LAI_2010, device = "jpeg", 
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot_higher_LAI_2019", ggplot_higher_LAI_2019, device = "jpeg", 
+       width = 9, height = 5, units = "in")
+
+#process repeated for LAI > 2 and LAI > 1
