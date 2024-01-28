@@ -7,15 +7,15 @@ library(vegan)
 data("dune")
 
 dune
-#to see only the initial and final part of the dataset
+                                                  #to see only the initial and final part of the dataset
 head(dune)
 tail(dune)
-#detrended correspondence analisys
+                                                 #detrended correspondence analisys
 decorana(dune)
 ord <- decorana(dune)
 ord
 
-#to find tghe total axis lenght
+                                                 #to find tghe total axis lenght
 ldc1 = 3.7004   
 ldc2 = 3.1166
 ldc3 = 1.30055
