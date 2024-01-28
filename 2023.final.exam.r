@@ -287,10 +287,10 @@ ggplot_LAI_dif2019_2000
 ggsave("ggplot_LAI_dif2010_2000.jpg", ggplot_LAI_dif2010_2000, device = "jpeg",
        width = 9, height = 5, units = "in")
 
-ggsave("ggplot_LAI_dif2019_2010", ggplot_LAI_dif2019_2010, device = "jpeg", 
+ggsave("ggplot_LAI_dif2019_2010.jpg", ggplot_LAI_dif2019_2010, device = "jpeg", 
        width = 9, height = 5, units = "in")
 
-ggsave("ggplot_LAI_dif2019_2000", ggplot_LAI_dif2019_2000, device = "jpeg", 
+ggsave("ggplot_LAI_dif2019_2000.jpg", ggplot_LAI_dif2019_2000, device = "jpeg", 
        width = 9, height = 5, units = "in")
 
 #pixel estimation
