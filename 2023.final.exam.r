@@ -16,13 +16,11 @@ library(patchwork) #composer of plots
 
 setwd("C:/Users/bruno/OneDrive/Desktop/Spatial.ecology")
 
-
 # Data saving using the function raster
 
 fcover2000<-raster("FCOVER2000.nc")
 fcover2010<-raster("FCOVER2010.nc")
 fcover2019<-raster("FCOVER2019.nc")
-
 
 # Cutting the map define the extent of the research
 
@@ -31,11 +29,9 @@ iceland2000<- crop(fcover2000, ext)
 iceland2010<- crop(fcover2010, ext)
 iceland2019<- crop(fcover2019, ext)
 
-
 plot(iceland2000)
 plot(iceland2010)
 plot(iceland2019)
-
 
 # Convert raster to data frame
 iceland2000_df <- as.data.frame(iceland2000, xy = TRUE)
@@ -48,12 +44,10 @@ ggplot2000<-ggplot(iceland2000_df, aes(x = x, y = y,
   scale_fill_viridis(option = "turbo") +
   ggtitle("FCOVER 2000")
 
-
 ggplot2010<-ggplot(iceland2010_df, aes(x = x, y = y, 
                                        fill = Fraction.of.green.Vegetation.Cover.1km)) +geom_tile() +
   scale_fill_viridis(option = "turbo") +
   ggtitle("FCOVER 2010")
-
 
 ggplot2019<-ggplot(iceland2019_df, aes(x = x, y = y, 
                                        fill = Fraction.of.green.Vegetation.Cover.1km)) +
@@ -64,8 +58,6 @@ ggplot2019<-ggplot(iceland2019_df, aes(x = x, y = y,
 ggplot2000
 ggplot2010
 ggplot2019
-
-?scale_fill_viridis
 
 #saving the new images in jpeg format
 
@@ -188,7 +180,6 @@ percentage_cover_change2019_2000
 
 #################################################################################
 #################################################################################
-#################################################################################
 
 #What kind of vegetation is lost? Leaf Area Index (LAI) assessment
 
@@ -201,7 +192,6 @@ LAI2000
 LAI2010
 LAI2019
 
-
 # Cutting the map define the extent of the research
 ext <- c(-26,-12,63,67)
 
@@ -212,7 +202,6 @@ LAIiceland2019<- crop(LAI2019, ext)
 plot(LAIiceland2000)
 plot(LAIiceland2010)
 plot(LAIiceland2019)
-
 
 # Convert raster to data frame
 LAIiceland2000_df <- as.data.frame(LAIiceland2000, xy = TRUE)
@@ -225,12 +214,10 @@ ggplot_LAI_2000<-ggplot(LAIiceland2000_df, aes(x = x, y = y,
   scale_fill_viridis(option = "turbo") +
   ggtitle("LEAF AREA INDEX 2000")
 
-
 ggplot_LAI_2010<-ggplot(LAIiceland2010_df, aes(x = x, y = y, 
          fill = Leaf.Area.Index.1km)) +geom_tile() +
   scale_fill_viridis(option = "turbo") +
   ggtitle("LEAF AREA INDEX 2010")
-
 
 ggplot_LAI_2019<-ggplot(LAIiceland2019_df, aes(x = x, y = y, 
            fill = Leaf.Area.Index.1km)) +
@@ -242,7 +229,6 @@ ggplot_LAI_2000
 ggplot_LAI_2010
 ggplot_LAI_2019
 
-
 #saving the new images in jpeg format
 
 ggsave("ggplot_LAI_2000.jpg", ggplot_LAI_2000, device = "jpeg",
@@ -253,7 +239,6 @@ ggsave("ggplot_LAI_2010.jpg", ggplot_LAI_2010, device = "jpeg",
 
 ggsave("ggplot_LAI_2019.jpg", ggplot_LAI_2019, device = "jpeg", 
        width = 9, height = 5, units = "in")
-
 
 # Difference between years to see the changes 
 
@@ -308,9 +293,7 @@ ggsave("ggplot_LAI_dif2019_2010", ggplot_LAI_dif2019_2010, device = "jpeg",
 ggsave("ggplot_LAI_dif2019_2000", ggplot_LAI_dif2019_2000, device = "jpeg", 
        width = 9, height = 5, units = "in")
 
-
 #pixel estimation
-
 #total pixel estimation
 tot_pixel_2000<-ncell(LAIiceland2000)
 tot_pixel_2010<-ncell(LAIiceland2010)
@@ -330,7 +313,6 @@ LAI_pixels_2019 <- sum(!is.na(LAIiceland2019[]) & LAIiceland2019[] > 3)
 LAI_pixels_2000 
 LAI_pixels_2010 
 LAI_pixels_2019
-
 
 # Calculation of the percentage of LAI cover > 3 over the total pixels
 LAI_percentage_cover_2000 <- (LAI_pixels_2000 / tot_pixel_2000) * 100
