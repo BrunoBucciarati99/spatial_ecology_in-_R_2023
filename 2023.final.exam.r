@@ -11,10 +11,6 @@ library(viridis) #colorblind-friendly map
 library(raster) #data analysis and modelling
 library(ggplot2) #data visualization
 library(patchwork) #composer of plots
-library(ncdf4)
-library(terra)
-library(RStoolbox) 
-
 
 # Data import, setting the work directory
 
@@ -346,9 +342,9 @@ LAI_percentage_cover_2010
 LAI_percentage_cover_2019 
 
 # Filter LAI values greater than 3
-LAIiceland2000[LAIiceland2000 <= 3] <- NA
-LAIiceland2010[LAIiceland2010 <= 3] <- NA
-LAIiceland2019[LAIiceland2019 <= 3] <- NA
+LAIiceland2000[LAIiceland2000 < 3] <- NA
+LAIiceland2010[LAIiceland2010 < 3] <- NA
+LAIiceland2019[LAIiceland2019 < 3] <- NA
 
 # Load Iceland map
 Iceland_map <- getData("GADM", country = "IS", level=0)
@@ -362,36 +358,36 @@ LAI2010_df <- as.data.frame(LAIiceland2010, xy = TRUE)
 LAI2019_df <- as.data.frame(LAIiceland2019, xy = TRUE)
 
 # Plot using ggplot2
-ggplot_higher_LAI_2000<-ggplot() +
+ggplot_LAI_3_2000<-ggplot() +
   geom_polygon(data = Iceland_map_df, aes(x = long, y = lat, group = group), fill = "white", color = "black") +
   geom_raster(data = LAI2000_df, aes(x = x, y = y, fill = Leaf.Area.Index.1km), alpha = 0.8) +
   scale_fill_viridis(option = "turbo", name = "LAI", guide = "legend") +
-  labs(title = "Leaf Area Index in Iceland - 2000") 
+  labs(title = "Leaf Area Index > 3 - 2000") + coord_fixed(ratio = 2)
 
-ggplot_higher_LAI_2010<-ggplot() +
+ggplot_LAI_3_2010<-ggplot() +
   geom_polygon(data = Iceland_map_df, aes(x = long, y = lat, group = group), fill = "white", color = "black") +
   geom_raster(data = LAI2010_df, aes(x = x, y = y, fill = Leaf.Area.Index.1km), alpha = 0.8) +
   scale_fill_viridis(option = "turbo", name = "LAI", guide = "legend") +
-  labs(title = "Leaf Area Index in Iceland - 2010") 
+  labs(title = "Leaf Area Index > 3 - 2010") + coord_fixed(ratio = 2)
 
-ggplot_higher_LAI_2019<-ggplot() +
+ggplot_LAI_3_2019<-ggplot() +
   geom_polygon(data = Iceland_map_df, aes(x = long, y = lat, group = group), fill = "white", color = "black") +
   geom_raster(data = LAI2019_df, aes(x = x, y = y, fill = Leaf.Area.Index.1km), alpha = 0.8) +
   scale_fill_viridis(option = "turbo", name = "LAI", guide = "legend") +
-  labs(title = "Leaf Area Index in Iceland - 2019") 
+  labs(title = "Leaf Area Index > 3 - 2019") + coord_fixed(ratio = 2)
 
-ggplot_higher_LAI_2000
-ggplot_higher_LAI_2010
-ggplot_higher_LAI_2019
+ggplot_LAI_3_2000
+ggplot_LAI_3_2010
+ggplot_LAI_3_2019
 
 ##saving the new images in jpeg format
-ggsave("ggplot_higher_LAI_2000.jpg", ggplot_higher_LAI_2000, device = "jpeg",
+ggsave("ggplot_LAI_3_2000.jpg", ggplot_LAI_3_2000, device = "jpeg",
        width = 9, height = 5, units = "in")
 
-ggsave("ggplot_higher_LAI_2010", ggplot_higher_LAI_2010, device = "jpeg", 
+ggsave("ggplot_LAI_3_2010.jpg", ggplot_LAI_3_2010, device = "jpeg", 
        width = 9, height = 5, units = "in")
 
-ggsave("ggplot_higher_LAI_2019", ggplot_higher_LAI_2019, device = "jpeg", 
+ggsave("ggplot_LAI_3_2019.jpg", ggplot_LAI_3_2019, device = "jpeg", 
        width = 9, height = 5, units = "in")
 
 #process repeated for LAI > 2 and LAI > 1
