@@ -73,16 +73,6 @@ ggsave("ggplot2019.jpg", ggplot2019, device = "jpeg",
 #changes in the years of the Fraction of green Vegetation Cover (3-plots comparison)
 # arrange the plots toghether and save in JPEG
 
-#vertical way
-combined_plots <- ggplot2000 / ggplot2010 / ggplot2019 +
-  plot_layout(nrow = 3, heights = c(1, 1, 1))
-
-combined_plots
-
-ggsave("combined_plots.jpg", combined_plots, 
-       device = "jpeg", width = 9, height = 10, units = "in")
-
-##horizontal way
 combined_plots <- ggplot2000 / ggplot2010 / ggplot2019 +
   plot_layout(nrow = 2, ncol = 2, heights = c(1, 1, 1))
 
