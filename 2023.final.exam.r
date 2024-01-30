@@ -293,8 +293,8 @@ tot_pixel_2000
 tot_pixel_2010
 tot_pixel_2019
 
-#LAI estimation 
-#exclusion of NA values before checking if the pixel 
+#Pixel estimation for different values of LAI
+#Exclusion of NA values before considering the pixels based on their value 
 #LAI values greater than 3 --> value associated with moderate vegetation density.
 LAI_pixels_2000 <- sum(!is.na(LAIiceland2000[]) & LAIiceland2000[] > 3)
 LAI_pixels_2010 <- sum(!is.na(LAIiceland2010[]) & LAIiceland2010[] > 3)
@@ -313,6 +313,7 @@ LAI_percentage_cover_2000
 LAI_percentage_cover_2010 
 LAI_percentage_cover_2019 
 
+# Plotting based on different values of LAI
 # Filter LAI values greater than 3
 LAIiceland2000[LAIiceland2000 < 3] <- NA
 LAIiceland2010[LAIiceland2010 < 3] <- NA
