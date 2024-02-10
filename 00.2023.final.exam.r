@@ -41,18 +41,18 @@ iceland2019_df <- as.data.frame(iceland2019, xy = TRUE)
 # Plot using ggplot2
 ggplot2000<-ggplot(iceland2000_df, aes(x = x, y = y, 
                                        fill = Fraction.of.green.Vegetation.Cover.1km)) +geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("FCOVER 2000")
 
 ggplot2010<-ggplot(iceland2010_df, aes(x = x, y = y, 
                                        fill = Fraction.of.green.Vegetation.Cover.1km)) +geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("FCOVER 2010")
 
 ggplot2019<-ggplot(iceland2019_df, aes(x = x, y = y, 
                                        fill = Fraction.of.green.Vegetation.Cover.1km)) +
   geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("FCOVER 2019")
 
 ggplot2000
@@ -104,19 +104,19 @@ dif2019_2000_df <- as.data.frame(dif2019_2000, xy = TRUE)
 ggplot_dif2010_2000 <- ggplot(dif2010_2000_df, aes(x = x, y = y, 
                                                    fill = layer)) +
   geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("FCOVER Change: 2010 - 2000")
 
 ggplot_dif2019_2010 <- ggplot(dif2019_2010_df, aes(x = x, y = y, 
                                                    fill = layer)) +
   geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("FCOVER Change: 2019 - 2010")
 
 ggplot_dif2019_2000 <- ggplot(dif2019_2000_df, aes(x = x, y = y, 
                                                    fill = layer)) +
   geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("FCOVER Change: 2019 - 2000")
 
 ggplot_dif2010_2000
@@ -201,18 +201,18 @@ LAIiceland2019_df <- as.data.frame(LAIiceland2019, xy = TRUE)
 # Plot using ggplot2
 ggplot_LAI_2000<-ggplot(LAIiceland2000_df, aes(x = x, y = y, 
           fill = Leaf.Area.Index.1km)) +geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("LEAF AREA INDEX 2000")
 
 ggplot_LAI_2010<-ggplot(LAIiceland2010_df, aes(x = x, y = y, 
          fill = Leaf.Area.Index.1km)) +geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("LEAF AREA INDEX 2010")
 
 ggplot_LAI_2019<-ggplot(LAIiceland2019_df, aes(x = x, y = y, 
            fill = Leaf.Area.Index.1km)) +
   geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("LEAF AREA INDEX 2019")
 
 ggplot_LAI_2000
@@ -253,19 +253,19 @@ LAI_dif2019_2000_df <- as.data.frame(LAI_dif2019_2000, xy = TRUE)
 ggplot_LAI_dif2010_2000 <- ggplot(LAI_dif2010_2000_df, aes(x = x, y = y, 
                                                    fill = layer)) +
   geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("LAI Change: 2010 - 2000")
 
 ggplot_LAI_dif2019_2010 <- ggplot(LAI_dif2019_2010_df, aes(x = x, y = y, 
                                                    fill = layer)) +
   geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("LAI Change: 2019 - 2010")
 
 ggplot_LAI_dif2019_2000 <- ggplot(LAI_dif2019_2000_df, aes(x = x, y = y, 
                                                    fill = layer)) +
   geom_tile() +
-  scale_fill_viridis(option = "turbo") +
+  scale_fill_viridis(option = "viridis") +
   ggtitle("LAI Change: 2019 - 2000")
 
 ggplot_LAI_dif2010_2000
@@ -334,19 +334,19 @@ LAI2019_df <- as.data.frame(LAIiceland2019, xy = TRUE)
 ggplot_LAI_3_2000<-ggplot() +
   geom_polygon(data = Iceland_map_df, aes(x = long, y = lat, group = group), fill = "white", color = "black") +
   geom_raster(data = LAI2000_df, aes(x = x, y = y, fill = Leaf.Area.Index.1km), alpha = 0.8) +
-  scale_fill_viridis(option = "turbo", name = "LAI", guide = "legend") +
+  scale_fill_viridis(option = "viridis", name = "LAI", guide = "legend") +
   labs(title = "Leaf Area Index > 3 - 2000") + coord_fixed(ratio = 2)
 
 ggplot_LAI_3_2010<-ggplot() +
   geom_polygon(data = Iceland_map_df, aes(x = long, y = lat, group = group), fill = "white", color = "black") +
   geom_raster(data = LAI2010_df, aes(x = x, y = y, fill = Leaf.Area.Index.1km), alpha = 0.8) +
-  scale_fill_viridis(option = "turbo", name = "LAI", guide = "legend") +
+  scale_fill_viridis(option = "viridis", name = "LAI", guide = "legend") +
   labs(title = "Leaf Area Index > 3 - 2010") + coord_fixed(ratio = 2)
 
 ggplot_LAI_3_2019<-ggplot() +
   geom_polygon(data = Iceland_map_df, aes(x = long, y = lat, group = group), fill = "white", color = "black") +
   geom_raster(data = LAI2019_df, aes(x = x, y = y, fill = Leaf.Area.Index.1km), alpha = 0.8) +
-  scale_fill_viridis(option = "turbo", name = "LAI", guide = "legend") +
+  scale_fill_viridis(option = "viridis", name = "LAI", guide = "legend") +
   labs(title = "Leaf Area Index > 3 - 2019") + coord_fixed(ratio = 2)
 
 ggplot_LAI_3_2000
