@@ -11,6 +11,7 @@ library(viridis) #colorblind-friendly map
 library(raster) #data analysis and modelling
 library(ggplot2) #data visualization
 library(patchwork) #composer of plots
+library(terra) #geospatial data analysis for raster data
 
 # Data import, setting the work directory
 
