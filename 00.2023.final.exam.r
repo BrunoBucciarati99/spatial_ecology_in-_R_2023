@@ -5,8 +5,13 @@
 #Therefore, the Icelandic Forest Service has decided to reach 12% by 2100.
 #The aim of the work is to analyze the change in the Fraction of green Vegetation Cover in Iceland from 2000 to 2019 to verify whether reforestation projects are working or not
 
-# Packages needed
+ggplot() + 
+  geom_raster(iceland2000, mapping = aes(x=x,  y = y, fill = FCOVER)) +
+  scale_fill_viridis(option = "viridis") +
+  ggtitle("FCOVER 2000")
 
+# Packages needed
+library(tidyterra) #interface between terra package and tidyverse package (including ggplot2)
 library(viridis) #colorblind-friendly map
 library(raster) #data analysis and modelling
 library(ggplot2) #data visualization
