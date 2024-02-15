@@ -25,6 +25,8 @@ plot(iceland2000)
 plot(iceland2010)
 plot(iceland2019)
 
+dev.off()
+
 # Plot using ggplot2
 ggplot2000<-ggplot() + 
   geom_raster(iceland2000, mapping = aes(x=x,  y = y, fill = FCOVER)) +
@@ -44,6 +46,8 @@ ggplot2019<-ggplot() +
 ggplot2000
 ggplot2010
 ggplot2019
+
+dev.off()
 
 #saving the new images in jpeg format
 
@@ -110,12 +114,12 @@ total_pixels_2019 <- ncell(iceland2019)
 total_pixels_2000
 total_pixels_2010
 total_pixels_2019
-#fcover estimation 
-#exclusion of NA values before checking if the pixel values are greater than 0.
-#values higher than 0 consider all the different qualities of Fcover.
-vegetation_pixels_2000 <- sum(!is.na(iceland2000[]) & iceland2000[] > 0)
-vegetation_pixels_2010 <- sum(!is.na(iceland2010[]) & iceland2010[] > 0)
-vegetation_pixels_2019 <- sum(!is.na(iceland2019[]) & iceland2019[] > 0)
+
+# Calculation of n. of pixels for values in FCOVER higher than 0 
+#data extraction and exclusion of missing values
+vegetation_pixels_2000 <- sum(iceland2000[["FCOVER"]][] > 0, na.rm = TRUE)
+vegetation_pixels_2010 <- sum(iceland2010[["FCOVER"]][] > 0, na.rm = TRUE)
+vegetation_pixels_2019 <- sum(iceland2019[["FCOVER"]][] > 0, na.rm = TRUE)
 
 vegetation_pixels_2000 
 vegetation_pixels_2010 
@@ -138,6 +142,7 @@ percentage_cover_change2019_2000<-percentage_cover_2019-percentage_cover_2000
 percentage_cover_change2010_2000
 percentage_cover_change2019_2010
 percentage_cover_change2019_2000
+
 
 #data interpretation
 
