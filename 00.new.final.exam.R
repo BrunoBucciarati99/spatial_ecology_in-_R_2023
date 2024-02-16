@@ -269,3 +269,32 @@ LAI_percentage_cover_2019 <- (LAI_pixels_2019 / tot_pixel_2019) * 100
 LAI_percentage_cover_2000 
 LAI_percentage_cover_2010 
 LAI_percentage_cover_2019 
+
+################################################################################
+# Extract the LAI layer from the raster
+lai_layer <- LAIiceland2000[["LAI"]]
+plot(lai_layer)
+
+# Replace LAI values lower than 3 with NA
+lai_layer[lai_layer < 3] <- NA
+lai_layer
+
+# Load Iceland map
+Iceland_map <- raster::getData("GADM", country = "IS", level=0)
+Iceland_map
+plot(Iceland_map)
+
+# Convert Iceland map to data frame
+Iceland_map <- fortify(Iceland_map)
+
+
+#############################################################################
+# Create a ggplot object
+
+ggplot_LAI_3_2000 <- ggplot() +
+  geom_polygon(data = Iceland_map, aes(x = long, y = lat, group = group), 
+  fill = "white", color = "black") +
+  geom_raster(data = lai_layer, aes(x = x, y = y, fill = LAI)) +
+  scale_fill_viridis(option = "viridis") +
+  ggtitle("Leaf Area Index > 3 - 2000") +
+  coord_fixed(ratio = 2)
