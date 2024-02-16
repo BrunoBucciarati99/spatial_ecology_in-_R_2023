@@ -284,17 +284,14 @@ Iceland_map <- raster::getData("GADM", country = "IS", level=0)
 Iceland_map
 plot(Iceland_map)
 
-# Convert Iceland map to data frame
-Iceland_map <- fortify(Iceland_map)
-
-
-#############################################################################
 # Create a ggplot object
 
 ggplot_LAI_3_2000 <- ggplot() +
   geom_polygon(data = Iceland_map, aes(x = long, y = lat, group = group), 
   fill = "white", color = "black") +
-  geom_raster(data = lai_layer, aes(x = x, y = y, fill = LAI)) +
+  geom_raster(data = lai_layer, aes(x = x, y = y, fill = LAI), alpha = 0.8) +
   scale_fill_viridis(option = "viridis") +
   ggtitle("Leaf Area Index > 3 - 2000") +
   coord_fixed(ratio = 2)
+
+ggplot_LAI_3_2000
