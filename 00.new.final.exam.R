@@ -148,10 +148,9 @@ percentage_cover_change2019_2000
 
 #################################################################################
 #################################################################################
-
 #What kind of vegetation is lost? Leaf Area Index (LAI) assessment
 
-# Data saving using the function raster
+# Data saving using the function rast
 LAI2000<-rast("LAI2000.nc")
 LAI2010<-rast("LAI2010.nc")
 LAI2019<-rast("LAI2019.nc")
@@ -270,28 +269,54 @@ LAI_percentage_cover_2000
 LAI_percentage_cover_2010 
 LAI_percentage_cover_2019 
 
-################################################################################
+#To visualize the results:
 # Extract the LAI layer from the raster
-lai_layer <- LAIiceland2000[["LAI"]]
-plot(lai_layer)
+lai_layer2000 <- LAIiceland2000[["LAI"]]
+lai_layer2010 <- LAIiceland2010[["LAI"]]
+lai_layer2019 <- LAIiceland2019[["LAI"]]
 
 # Replace LAI values lower than 3 with NA
-lai_layer[lai_layer < 3] <- NA
-lai_layer
+lai_layer2000[lai_layer2000 < 3] <- NA
+lai_layer2010[lai_layer2010 < 3] <- NA
+lai_layer2019[lai_layer2019 < 3] <- NA
 
 # Load Iceland map
 Iceland_map <- raster::getData("GADM", country = "IS", level=0)
-Iceland_map
-plot(Iceland_map)
 
 # Create a ggplot object
 
 ggplot_LAI_3_2000 <- ggplot() +
   geom_polygon(data = Iceland_map, aes(x = long, y = lat, group = group), 
   fill = "white", color = "black") +
-  geom_raster(data = lai_layer, aes(x = x, y = y, fill = LAI), alpha = 0.8) +
+  geom_raster(data = lai_layer2000, aes(x = x, y = y, fill = LAI), alpha = 0.8) +
   scale_fill_viridis(option = "viridis") +
   ggtitle("Leaf Area Index > 3 - 2000") +
   coord_fixed(ratio = 2)
 
-ggplot_LAI_3_2000
+ggplot_LAI_3_2010 <- ggplot() +
+  geom_polygon(data = Iceland_map, aes(x = long, y = lat, group = group), 
+  fill = "white", color = "black") +
+  geom_raster(data = lai_layer2010, aes(x = x, y = y, fill = LAI), alpha = 0.8) +
+  scale_fill_viridis(option = "viridis") +
+  ggtitle("Leaf Area Index > 3 - 2000") +
+  coord_fixed(ratio = 2)
+
+ggplot_LAI_3_2010 <- ggplot() +
+  geom_polygon(data = Iceland_map, aes(x = long, y = lat, group = group), 
+  fill = "white", color = "black") +
+  geom_raster(data = lai_layer2019, aes(x = x, y = y, fill = LAI), alpha = 0.8) +
+  scale_fill_viridis(option = "viridis") +
+  ggtitle("Leaf Area Index > 3 - 2000") +
+  coord_fixed(ratio = 2)
+
+##saving the new images in jpeg format
+ggsave("ggplot_LAI_3_2000.jpg", ggplot_LAI_3_2000, device = "jpeg",
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot_LAI_3_2010.jpg", ggplot_LAI_3_2010, device = "jpeg", 
+       width = 9, height = 5, units = "in")
+
+ggsave("ggplot_LAI_3_2019.jpg", ggplot_LAI_3_2019, device = "jpeg", 
+       width = 9, height = 5, units = "in")
+
+#process repeated by excluding pixels with LAI < 2 and LAI < 1
