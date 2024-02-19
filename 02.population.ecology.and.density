@@ -1,4 +1,4 @@
-                                                                                #spatstat package: package of statistycal analysis for spatial data
+library(spatstat)                                                                               #spatstat package: package of statistycal analysis for spatial data
 bei                                                                             #huge amount of data and huge data points, we need to sort that 
                                                                                 #all points are trees in the landscape
 plot(bei) 
