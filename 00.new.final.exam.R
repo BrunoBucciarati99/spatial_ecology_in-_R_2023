@@ -190,17 +190,33 @@ tot_pixel_2000<-ncell(LAIiceland2000)
 tot_pixel_2010<-ncell(LAIiceland2010)
 tot_pixel_2019<-ncell(LAIiceland2019)
 
+# Calculation of n. of pixels for values in LAI higher than 0 
+# Data extraction and exclusion of missing values
+LAI_pixels_2000 <- sum(LAIiceland2000[["LAI"]][] > 0, na.rm = TRUE)
+LAI_pixels_2010 <- sum(LAIiceland2010[["LAI"]][] > 0, na.rm = TRUE)
+LAI_pixels_2019 <- sum(LAIiceland2019[["LAI"]][] > 0, na.rm = TRUE)
+
+# Calculation of the percentage of LAI cover over the total pixels
+LAI_perc_cover_2000 <- (LAI_pixels_2000 / tot_pixel_2000) * 100
+LAI_perc_cover_2010 <- (LAI_pixels_2010 / tot_pixel_2010) * 100
+LAI_perc_cover_2019 <- (LAI_pixels_2019 / tot_pixel_2019) * 100
+
+#calculation of the pixel difference related to LAI in 2000,2010,2019
+LAI_cover_change2010_2000<-LAI_perc_cover_2010-LAI_perc_cover_2000
+LAI_cover_change2019_2010<-LAI_perc_cover_2019-LAI_perc_cover_2010
+LAI_cover_change2019_2000<-LAI_perc_cover_2019-LAI_perc_cover_2000
+
 #Pixel estimation for different values of LAI
 #Exclusion of NA values before considering the pixels based on their value 
 #LAI values greater than 3 --> value associated with moderate vegetation density.
-LAI_pixels_2000 <- sum(!is.na(LAIiceland2000[["LAI"]][]) & LAIiceland2000[["LAI"]][] > 3)
-LAI_pixels_2010 <- sum(!is.na(LAIiceland2010[["LAI"]][]) & LAIiceland2010[["LAI"]][] > 3)
-LAI_pixels_2019 <- sum(!is.na(LAIiceland2019[["LAI"]][]) & LAIiceland2019[["LAI"]][] > 3)
+LAI_pix_2000 <- sum(!is.na(LAIiceland2000[["LAI"]][]) & LAIiceland2000[["LAI"]][] > 3)
+LAI_pix_2010 <- sum(!is.na(LAIiceland2010[["LAI"]][]) & LAIiceland2010[["LAI"]][] > 3)
+LAI_pix_2019 <- sum(!is.na(LAIiceland2019[["LAI"]][]) & LAIiceland2019[["LAI"]][] > 3)
 
 # Calculation of the percentage of LAI cover > 3 over the total pixels
-LAI_percentage_cover_2000 <- (LAI_pixels_2000 / tot_pixel_2000) * 100
-LAI_percentage_cover_2010 <- (LAI_pixels_2010 / tot_pixel_2010) * 100
-LAI_percentage_cover_2019 <- (LAI_pixels_2019 / tot_pixel_2019) * 100
+LAI_percentage_cover_2000 <- (LAI_pix_2000 / tot_pixel_2000) * 100
+LAI_percentage_cover_2010 <- (LAI_pix_2010 / tot_pixel_2010) * 100
+LAI_percentage_cover_2019 <- (LAI_pix_2019 / tot_pixel_2019) * 100
 
 #To visualize the results:
 # Extract the LAI layer from the raster
