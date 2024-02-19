@@ -104,14 +104,11 @@ percentage_cover_change2010_2000<-percentage_cover_2010-percentage_cover_2000
 percentage_cover_change2019_2010<-percentage_cover_2019-percentage_cover_2010
 percentage_cover_change2019_2000<-percentage_cover_2019-percentage_cover_2000
 
-percentage_cover_change2010_2000
-percentage_cover_change2019_2010
-percentage_cover_change2019_2000
-
 #data interpretation
 
 #################################################################################
 #################################################################################
+
 #What kind of vegetation is lost? Leaf Area Index (LAI) assessment
 
 # Data saving using the function rast
@@ -193,10 +190,6 @@ tot_pixel_2000<-ncell(LAIiceland2000)
 tot_pixel_2010<-ncell(LAIiceland2010)
 tot_pixel_2019<-ncell(LAIiceland2019)
 
-tot_pixel_2000
-tot_pixel_2010
-tot_pixel_2019
-
 #Pixel estimation for different values of LAI
 #Exclusion of NA values before considering the pixels based on their value 
 #LAI values greater than 3 --> value associated with moderate vegetation density.
@@ -204,18 +197,10 @@ LAI_pixels_2000 <- sum(!is.na(LAIiceland2000[["LAI"]][]) & LAIiceland2000[["LAI"
 LAI_pixels_2010 <- sum(!is.na(LAIiceland2010[["LAI"]][]) & LAIiceland2010[["LAI"]][] > 3)
 LAI_pixels_2019 <- sum(!is.na(LAIiceland2019[["LAI"]][]) & LAIiceland2019[["LAI"]][] > 3)
 
-LAI_pixels_2000 
-LAI_pixels_2010 
-LAI_pixels_2019
-
 # Calculation of the percentage of LAI cover > 3 over the total pixels
 LAI_percentage_cover_2000 <- (LAI_pixels_2000 / tot_pixel_2000) * 100
 LAI_percentage_cover_2010 <- (LAI_pixels_2010 / tot_pixel_2010) * 100
 LAI_percentage_cover_2019 <- (LAI_pixels_2019 / tot_pixel_2019) * 100
-
-LAI_percentage_cover_2000 
-LAI_percentage_cover_2010 
-LAI_percentage_cover_2019 
 
 #To visualize the results:
 # Extract the LAI layer from the raster
@@ -231,7 +216,7 @@ lai_layer2019[lai_layer2019 < 3] <- NA
 # Load Iceland map
 Iceland_map <- raster::getData("GADM", country = "IS", level=0)
 
-# Create a ggplot object
+# Overlap the pixels obtained and the icelandic map with ggplot 
 
 ggplot_LAI_3_2000 <- ggplot() +
   geom_polygon(data = Iceland_map, aes(x = long, y = lat, group = group), 
