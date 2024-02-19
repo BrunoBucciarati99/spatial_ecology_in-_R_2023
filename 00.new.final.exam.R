@@ -8,7 +8,7 @@ library(terra) #geospatial data analysis for raster data
 
 setwd("C:/Users/bruno/OneDrive/Desktop/Spatial.ecology")
 
-# Data saving using the function raster
+# Data saving using the function rast
 
 fcover2000<-rast("FCOVER2000.nc")
 fcover2010<-rast("FCOVER2010.nc")
@@ -213,7 +213,7 @@ lai_layer2000[lai_layer2000 < 3] <- NA
 lai_layer2010[lai_layer2010 < 3] <- NA
 lai_layer2019[lai_layer2019 < 3] <- NA
 
-# Load Iceland map
+# Load Iceland map with the "getData" function from raster package
 Iceland_map <- raster::getData("GADM", country = "IS", level=0)
 
 # Overlap the pixels obtained and the icelandic map with ggplot 
