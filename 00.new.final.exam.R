@@ -1,5 +1,5 @@
 # Packages needed
-library(tidyterra) #interface between terra package and tidyverse package (including ggplot2)
+library(tidyterra) #interface between terra and tidyverse 
 library(viridis) #colorblind-friendly map
 library(ggplot2) #data visualization
 library(terra) #geospatial data analysis for raster data
@@ -21,12 +21,6 @@ iceland2000<- crop(fcover2000, ext)
 iceland2010<- crop(fcover2010, ext)
 iceland2019<- crop(fcover2019, ext)
 
-plot(iceland2000)
-plot(iceland2010)
-plot(iceland2019)
-
-dev.off()
-
 # Plot using ggplot2
 ggplot2000<-ggplot() + 
   geom_raster(iceland2000, mapping = aes(x=x,  y = y, fill = FCOVER)) +
@@ -43,12 +37,6 @@ ggplot2019<-ggplot() +
   scale_fill_viridis(option = "viridis") +
   ggtitle("FRACTION OF GREEN VEGETATION COVER 2019")
 
-ggplot2000
-ggplot2010
-ggplot2019
-
-dev.off()
-
 #saving the new images in jpeg format
 
 ggsave("ggplot2000.jpg", ggplot2000, device = "jpeg",
@@ -62,77 +50,54 @@ ggsave("ggplot2019.jpg", ggplot2019, device = "jpeg",
 
 # Difference between years to see the changes 
 
-dif2010_2000<-iceland2010-iceland2000
-
+dif2010_2000 <- iceland2010-iceland2000
 dif2019_2010 <- iceland2019-iceland2010
-
 dif2019_2000 <- iceland2019-iceland2000
-
-plot(dif2010_2000)
-plot(dif2019_2010)
-plot(dif2019_2000)
 
 # Plotting the differences using ggplot2
 
 ggplot_dif2010_2000 <- ggplot() + 
   geom_raster(dif2010_2000, mapping = aes(x=x,  y = y, fill = FCOVER)) +
   scale_fill_viridis(option = "viridis") +
-  ggtitle("FCOVER Change: 2010 - 2000")
+  ggtitle("FCOVER Change: 2000 - 2010")
 
 ggplot_dif2019_2010 <- ggplot() + 
   geom_raster(dif2019_2010, mapping = aes(x=x,  y = y, fill = FCOVER)) +
   scale_fill_viridis(option = "viridis") +
-  ggtitle("FCOVER Change: 2019 - 2010")
+  ggtitle("FCOVER Change: 2010 - 2019")
 
 ggplot_dif2019_2000 <- ggplot() + 
   geom_raster(dif2019_2000, mapping = aes(x=x,  y = y, fill = FCOVER)) +
   scale_fill_viridis(option = "viridis") +
-  ggtitle("FCOVER Change: 2019 - 2000")
-
-ggplot_dif2010_2000
-ggplot_dif2019_2010
-ggplot_dif2019_2000
+  ggtitle("FCOVER Change: 2000 - 2019")
 
 #saving the new images in jpeg format
 
 ggsave("ggplot_dif2010_2000.jpg", ggplot_dif2010_2000, device = "jpeg",
        width = 9, height = 5, units = "in")
 
-ggsave("ggplot_dif2019_2010", ggplot_dif2019_2010, device = "jpeg", 
+ggsave("ggplot_dif2019_2010.jpg", ggplot_dif2019_2010, device = "jpeg", 
        width = 9, height = 5, units = "in")
 
-ggsave("ggplot_dif2019_2000", ggplot_dif2019_2000, device = "jpeg", 
+ggsave("ggplot_dif2019_2000.jpg", ggplot_dif2019_2000, device = "jpeg", 
        width = 9, height = 5, units = "in")
 
 #pixel estimation
-
 #total pixel estimation
 total_pixels_2000 <- ncell(iceland2000)
 total_pixels_2010 <- ncell(iceland2010)
 total_pixels_2019 <- ncell(iceland2019)
 
-total_pixels_2000
-total_pixels_2010
-total_pixels_2019
-
 # Calculation of n. of pixels for values in FCOVER higher than 0 
-#data extraction and exclusion of missing values
+# Data extraction and exclusion of missing values
 vegetation_pixels_2000 <- sum(iceland2000[["FCOVER"]][] > 0, na.rm = TRUE)
 vegetation_pixels_2010 <- sum(iceland2010[["FCOVER"]][] > 0, na.rm = TRUE)
 vegetation_pixels_2019 <- sum(iceland2019[["FCOVER"]][] > 0, na.rm = TRUE)
-
-vegetation_pixels_2000 
-vegetation_pixels_2010 
-vegetation_pixels_2019
 
 # Calculation of the percentage of vegetation cover over the total pixels
 percentage_cover_2000 <- (vegetation_pixels_2000 / total_pixels_2000) * 100
 percentage_cover_2010 <- (vegetation_pixels_2010 / total_pixels_2010) * 100
 percentage_cover_2019 <- (vegetation_pixels_2019 / total_pixels_2019) * 100
-
-percentage_cover_2000
-percentage_cover_2010
-percentage_cover_2019
 
 #calculation of the pixel difference related to Fcover in 2000,2010,2019
 percentage_cover_change2010_2000<-percentage_cover_2010-percentage_cover_2000
@@ -142,7 +107,6 @@ percentage_cover_change2019_2000<-percentage_cover_2019-percentage_cover_2000
 percentage_cover_change2010_2000
 percentage_cover_change2019_2010
 percentage_cover_change2019_2000
-
 
 #data interpretation
 
@@ -162,10 +126,6 @@ LAIiceland2000<- crop(LAI2000, ext)
 LAIiceland2010<- crop(LAI2010, ext)
 LAIiceland2019<- crop(LAI2019, ext)
 
-plot(LAIiceland2000)
-plot(LAIiceland2010)
-plot(LAIiceland2019)
-
 # Plot using ggplot2
 ggplot_LAI_2000<-ggplot() + 
   geom_raster(LAIiceland2000, mapping = aes(x=x,  y = y, fill = LAI )) +
@@ -182,10 +142,6 @@ ggplot_LAI_2019<-ggplot() +
   scale_fill_viridis(option = "viridis") +
   ggtitle("LEAF AREA INDEX 2019")
 
-ggplot_LAI_2000
-ggplot_LAI_2010
-ggplot_LAI_2019
-
 #saving the new images in jpeg format
 
 ggsave("ggplot_LAI_2000.jpg", ggplot_LAI_2000, device = "jpeg",
@@ -200,33 +156,25 @@ ggsave("ggplot_LAI_2019.jpg", ggplot_LAI_2019, device = "jpeg",
 # Difference between years to see the changes 
 
 LAI_dif2010_2000<-LAIiceland2010-LAIiceland2000
-
 LAI_dif2019_2010<-LAIiceland2019-LAIiceland2010
-
 LAI_dif2019_2000<-LAIiceland2019-LAIiceland2000
-
 
 # Plotting the differences using ggplot2
 
 ggplot_LAI_dif2010_2000 <- ggplot() + 
   geom_raster(LAI_dif2010_2000, mapping = aes(x=x,  y = y, fill = LAI )) +
   scale_fill_viridis(option = "viridis") +
-  ggtitle("LAI Change: 2010 - 2000")
-
+  ggtitle("LAI Change: 2000 - 2010")
 
 ggplot_LAI_dif2019_2010 <- ggplot() + 
   geom_raster(LAI_dif2019_2010, mapping = aes(x=x,  y = y, fill = LAI )) +
   scale_fill_viridis(option = "viridis") +
-  ggtitle("LAI Change: 2019 - 2010")
+  ggtitle("LAI Change: 2010 - 2019")
 
 ggplot_LAI_dif2019_2000 <- ggplot() + 
   geom_raster(LAI_dif2019_2000, mapping = aes(x=x,  y = y, fill = LAI )) +
   scale_fill_viridis(option = "viridis") +
-  ggtitle("LAI Change: 2019 - 2000")
-
-ggplot_LAI_dif2010_2000
-ggplot_LAI_dif2019_2010
-ggplot_LAI_dif2019_2000
+  ggtitle("LAI Change: 2000 - 2019")
 
 #saving the new images in jpeg format
 
@@ -290,7 +238,7 @@ ggplot_LAI_3_2000 <- ggplot() +
   fill = "white", color = "black") +
   geom_raster(data = lai_layer2000, aes(x = x, y = y, fill = LAI), alpha = 0.8) +
   scale_fill_viridis(option = "viridis") +
-  ggtitle("Leaf Area Index > 3 - 2000") +
+  ggtitle("Leaf Area Index > 3  (2000)") +
   coord_fixed(ratio = 2)
 
 ggplot_LAI_3_2010 <- ggplot() +
@@ -298,15 +246,15 @@ ggplot_LAI_3_2010 <- ggplot() +
   fill = "white", color = "black") +
   geom_raster(data = lai_layer2010, aes(x = x, y = y, fill = LAI), alpha = 0.8) +
   scale_fill_viridis(option = "viridis") +
-  ggtitle("Leaf Area Index > 3 - 2000") +
+  ggtitle("Leaf Area Index > 3  (2010)") +
   coord_fixed(ratio = 2)
 
-ggplot_LAI_3_2010 <- ggplot() +
+ggplot_LAI_3_2019 <- ggplot() +
   geom_polygon(data = Iceland_map, aes(x = long, y = lat, group = group), 
   fill = "white", color = "black") +
   geom_raster(data = lai_layer2019, aes(x = x, y = y, fill = LAI), alpha = 0.8) +
   scale_fill_viridis(option = "viridis") +
-  ggtitle("Leaf Area Index > 3 - 2000") +
+  ggtitle("Leaf Area Index > 3  (2019)") +
   coord_fixed(ratio = 2)
 
 ##saving the new images in jpeg format
