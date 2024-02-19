@@ -6,6 +6,7 @@ install.packages("terra") #predictors, spatial data analysis
 install.packages("rgdal")  #species
 library(sdm)
 library(terra)
+library(rgdal)
 file<- system.file("external/species.shp",package = "sdm")
 system.file("external/species.shp",package = "sdm")
 file
